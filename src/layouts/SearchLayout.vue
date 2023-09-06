@@ -9,17 +9,17 @@
         <q-route-tab
           :to="{ name: 'profile', params: { id: 1 } }"
           replace
-          label="Walter White"
+          label="Profile 1"
         />
         <q-route-tab
           :to="{ name: 'profile', params: { id: 2 } }"
           replace
-          label="Jesse Pinkman"
+          label="Profile 2"
         />
         <q-route-tab
           :to="{ name: 'profile', params: { id: 'random' } }"
           replace
-          label="Random"
+          label="Random Profile"
         />
       </q-tabs>
     </q-header>
