@@ -25,6 +25,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        color: black;
       "
     >
       <div class="row" style="display: flex; flex-direction: column">
