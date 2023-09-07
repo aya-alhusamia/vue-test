@@ -1,134 +1,122 @@
 <template>
   <q-page
-    class="row"
-    style="background: #e9e9e9; display: grid; grid-template-columns: 4fr 2fr"
+    class="row items-center justify-center"
+    style="background-color: #e9e9e9; height: calc(100vh - 70px)"
   >
-    <div class="gt-xs" style="height: calc(100vh - 70px)">
+    <div class="col gt-sm full-height">
       <q-img
         src="../assets/login3.png"
         spinner-color="white"
-        sizes="(max-width: 400px) 400w,
-              (min-width: 400px) and (max-width: 800px) 600w,
-              (min-width: 800px) and (max-width: 1200px) 1000w,
-              (min-width: 1200px) 1600w"
-        style="height: 100%; max-width: 600px; margin-left: 10%"
         img-class="my-custom-image"
-        class="rounded-borders responsive"
+        class="rounded-borders responsive fit"
+        fit="cover"
       />
     </div>
     <div
-      class="col-xl-5 col-md-5 col-xs-11 q-pa-sm"
-      style="
-        background: #ffffff;
-        height: calc(100vh - 70px);
-        width: 100vw;
-        margin: 10px 10px 10px;
-        border-radius: 25px;
-        max-width: 630px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        overflow: auto;
-        color: black;
-      "
+      class="col-xl-5 col-lg-5 col-md-7 col-sm-10 col-xs-12 full-height border-r25"
+      :class="$q.screen.gt.sm ? 'q-pa-lg' : 'q-pa-sm'"
     >
-      <div
-        class="row"
-        style="display: flex; flex-direction: column; margin-bottom: 20px"
-      >
-        <div
-          style="display: flex; align-items: center; justify-content: center"
-        >
-          <q-img
-            class="q-mt-xl"
-            style="margin-bottom: -50px"
-            src="../assets/settings_black_24dp.svg"
-            width="50px"
+      <div class="row justify-center bg-white full-height border-r25">
+        <div class="col-12 q-pt-xl">
+          <q-icon
+            style="margin: auto; display: block"
+            name="settings"
+            size="xl"
+            color="primary"
           />
-        </div>
-        <div class="text-h3 text-center text-bold q-pt-xl q-mt-xl">
-          Welcom Back
-        </div>
-        <div class="text-center q-mt-md">Please Enter Your details</div>
-      </div>
-      <div class="row" style="display: flex; flex-direction: column">
-        <div class="">
-          <q-form class="q-gutter-sm">
-            <q-input
-              type="text"
-              v-model="email"
-              label="Email"
-              :rules="[
-                (val) => (val && val.length > 0) || 'Please type something',
-              ]"
-            />
-            <div class="q-mb-sm">
+
+          <div class="text-h3 text-center text-bold q-mt-lg">Welcom Back</div>
+          <div class="text-center q-mt-sm">Please Enter Your details</div>
+
+          <q-form class="q-gutter-sm q-pa-sm row justify-center">
+            <div class="col-xl-6 col-lg-6 col-md-8 col-sm-6 col-xs-11">
               <q-input
-                class="q-mb-xs"
-                :type="passwordFieldType"
-                v-model="password"
-                label="Password"
+                type="text"
+                v-model="email"
+                label="Email"
                 :rules="[
                   (val) => (val && val.length > 0) || 'Please type something',
                 ]"
+              />
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-8 col-sm-6 col-xs-11">
+              <q-input
+                class="q-mb-xs"
+                :type="isPwd ? 'password' : 'text'"
+                v-model="password"
+                label="Password"
+                :rules="[
+                  (val) =>
+                    (val && val.length >= 8 && val.length <= 20) ||
+                    'pass should be longer ',
+                ]"
               >
                 <template v-slot:append>
-                  <!-- <q-icon
-                    name="close"
-                    @click="switchVisibility"
+                  <q-icon
+                    :name="isPwd ? 'visibility_off' : 'visibility'"
                     class="cursor-pointer"
-                  /> -->
-
-                  <img
+                    @click="isPwd = !isPwd"
+                  />
+                  <!-- <img
                     src="../assets/remove_red_eye_black_24dp.svg"
                     @click="switchVisibility"
-                  />
+                  /> -->
                 </template>
               </q-input>
             </div>
-          </q-form>
-
-          <div class="q-pa-sm row">
-            <div class="q-mb-lg" style="width: 100%">
-              <q-checkbox
-                v-model="check"
-                label="Remember Me"
-                style="margin-top: -10%"
-              />
+            <div class="col-xl-6 col-lg-6 col-md-8 col-sm-6 col-xs-11">
+              <q-select
+                class="col-12"
+                v-model="model"
+                :options="listItems"
+                label="Standerd"
+                stack-label
+              >
+              </q-select>
+            </div>
+            <div
+              class="col-xl-6 col-lg-6 col-md-8 col-sm-6 col-xs-11 q-pa-xs row justify-between items-center"
+            >
+              <q-checkbox v-model="check" label="Remember Me" />
               <a
                 href=""
                 class="float-right"
-                style="
-                  text-decoration: none;
-                  margin-top: -5%;
-                  margin-left: -40%;
-                  color: #6d6969;
-                "
+                style="text-decoration: none; color: #6d6969"
                 >Forget Paswword?</a
               >
+              <!-- <q-select
+                v-model="model"
+                :options="listItems"
+                label="Standard"
+                stack-label
+                :dense="dense"
+                :options-dense="denseOpts"
+              />
+              <ul>
+                <li v-for="item in listItems" :key="item.id">
+                  {{ item.name }}
+                </li>
+              </ul> -->
             </div>
-            <div style="display: flex; flex-direction: column; width: 100%">
+
+            <q-toolbar class="justify-center">
               <q-btn
                 label="Login"
                 unelevated
                 rounded
-                style="width: 100%"
-                color="black"
-                class="text-white q-mb-md"
+                color="primary"
+                text-color="white"
+                class="text-white bg-primary col-auto q-mx-sm"
+                style="width: 120px"
               ></q-btn>
-
               <q-btn
                 no-caps
                 unelevated
                 rounded
-                style="
-                  width: 100%;
-                  align-items: center;
-                  background-color: #e9e9e9;
-                "
-                color="#e9e9e9"
-                text-color="black"
-                class="text-white q-pa-sm"
+                color="secondary"
+                text-color="primary"
+                class="col-auto q-mx-sm"
+                style="width: 220px"
               >
                 <q-img
                   src="/src/assets/google.png"
@@ -137,31 +125,103 @@
                 />
                 <div>Log in with Google</div>
               </q-btn>
-            </div>
-          </div>
+            </q-toolbar>
+          </q-form>
         </div>
       </div>
     </div>
   </q-page>
 </template>
+<script setup lang="ts">
+import { ref, onMounted } from 'vue';
+import { api } from 'src/boot/axios';
+import axios from 'axios';
+import { log } from 'console';
+export interface Company {
+  name: string;
+  countryCode: string;
+  market_cap: string;
+  id: number;
+}
 
-<script lang="ts">
-import { text } from '@fortawesome/fontawesome-svg-core';
+const check = ref(false);
+const isPwd = ref(true);
+const email = ref('');
+const password = ref('');
+const listItems = ref<string[]>([]);
+const model = ref(null);
 
+// async function getData() {
+//   const res = await fetch('https://testapi.devtoolsdaily.com/companies/');
+//   const finalRes = (await res.json()) as Company[];
+//   finalRes.forEach((element: Company) => {
+//     listItems.value.push(element.name);
+//   });
+// }
+
+// getData();
+
+// const getItems = async () => {
+//   try {
+//     const { res } = await api.get(
+//       'https://testapi.devtoolsdaily.com/companies/'
+//     );
+//     listItems.value = res;
+//     console.log(res);
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
+// onMounted(() => {
+//   getItems();
+// });
+// onMounted(() => {
+//   axios.get('https://testapi.devtoolsdaily.com/companies/').then((res) => {
+//     res.forEach(element => {
+//       listItems.value=res.data;
+//     });
+//   });
+// });
+const getItem = async () => {
+  try {
+    const res = await axios.get('https://testapi.devtoolsdaily.com/companies/');
+    const finalRes = (await res.data) as Company[];
+    finalRes.forEach((el: Company) => {
+      listItems.value.push(el.name);
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
+onMounted(() => {
+  getItem();
+});
+</script>
+
+<!-- <script lang="ts">
+import { ref, computed } from 'vue';
 export default {
-  data() {
+  setup() {
+
+const listItems=[]
     return {
-      check: false,
-      email: '',
-      password: '',
-      passwordFieldType: 'password' || null,
+
+      check: ref(false),
+      isPwd: ref(true),
+      email: ref(''),
+      password: ref(''),
+      regularExpression: ref(
+        /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*] $/
+      ),
+      model: ref(null),
+      options: ['Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'],
+      listItems: [],
+      dense: ref(false),
+      denseOpts: ref(false),
+
+
+
     };
   },
-  methods: {
-    switchVisibility() {
-      this.passwordFieldType =
-        this.passwordFieldType === 'password' ? 'text' : 'password';
-    },
-  },
 };
-</script>
+</script> -->
