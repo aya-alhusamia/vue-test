@@ -21,11 +21,7 @@
           replace
           label="Random Profile"
         />
-        <q-route-tab
-          :to="{ name: 'login', params: { id: 'random' } }"
-          replace
-          label="Login"
-        />
+        <q-route-tab :to="{ name: 'login' }" replace label="Login" />
       </q-tabs>
     </q-header>
 
