@@ -3,23 +3,15 @@
     class="row"
     style="background: #e9e9e9; display: grid; grid-template-columns: 4fr 2fr"
   >
-    <div
-      class="col-xl-7 col-md-7 col-xs-7 gt-xs"
-      style="height: calc(100vh - 70px)"
-    >
+    <div class="gt-xs" style="height: calc(100vh - 70px)">
       <q-img
         src="../assets/login3.png"
         spinner-color="white"
         sizes="(max-width: 400px) 400w,
-              (min-width: 400px) and (max-width: 800px) 800w,
-              (min-width: 800px) and (max-width: 1200px) 1200w,
+              (min-width: 400px) and (max-width: 800px) 600w,
+              (min-width: 800px) and (max-width: 1200px) 1000w,
               (min-width: 1200px) 1600w"
-        style="
-          height: 100%;
-          max-width: 600px;
-
-          margin-left: 20%;
-        "
+        style="height: 100%; max-width: 600px; margin-left: 10%"
         img-class="my-custom-image"
         class="rounded-borders responsive"
       />
